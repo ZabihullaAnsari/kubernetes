@@ -20,4 +20,18 @@ spec:
           image: zabihulla01/app1
           ports:
            -  containerPort: 80
-
+          env:
+          - name: ENV 
+            valumeFrom:
+              configMapKeyRef:
+                name: app-config
+                key: ENV 
+          - name: data
+            valumeFrom: 
+              secretKeyRef:
+                name: data
+                key: password
+          volumeMounts:
+          - name: storage
+            persistentVolumeClaim:
+              claimName: pvc
