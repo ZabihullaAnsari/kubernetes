@@ -22,16 +22,19 @@ spec:
            -  containerPort: 80
           env:
           - name: ENV 
-            valumeFrom:
+            valueFrom:
               configMapKeyRef:
                 name: app-config
                 key: ENV 
           - name: data
-            valumeFrom: 
+            valueFrom: 
               secretKeyRef:
                 name: data
                 key: password
           volumeMounts:
           - name: storage
-            persistentVolumeClaim:
-              claimName: pvc
+            mountPath: /data
+      volumes:
+      - name: storage
+        persistentVolumeClaim:    
+            claimName: pvc
